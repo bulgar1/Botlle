@@ -6,7 +6,7 @@
 	width: 236px;
 }
 .img{
-	
+
 	width: 236px;
 }
 .imginfo{
@@ -32,8 +32,8 @@
 	background: #eee;
 	width: 100%;
 	font-family: 'Source Sans Pro', sans-serif;
-}*/
-.searchbar{
+/*}*/
+/*.searchbar{
 	margin-left: 25px;
 }
 .slide{
@@ -150,4 +150,4 @@
 	-moz-column-count: 6;
 	column-count: 6;
 }
-}
+}*/

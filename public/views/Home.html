@@ -27,11 +27,11 @@
 		</div>
 	</div>
 </div> -->
-<div ng-controller="HomeController as vm" class="botlleGrid">
+ <div ng-controller="HomeController as vm" class="botlleGrid">
 	<div ng-repeat="botlle in vm.botlles | filter:searchBotlle" ng-show="botlle.deleted" class="botlleGridWrapper">
-		<div class="botlle animated flipInY">
+		<div class="botlle ">
 			<div>
-				<h3 class="textCenter">{{botlle.title}}</h3>
+				<h3 class="textCenter">{{botlle.title}}</h3> 
 
 				<img ng-src="{{botlle.img}}">
 			    <h4 class="textCenter">
@@ -46,7 +46,7 @@
 			    		{{botlle.likes}}
 			    	</span><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
 
-				<button ui-sref="BotlleInfo({id: botlle._id})" class="borderRadius marginBottom btn btn-info pull-right">Dive In</button><br><br>
+				<button ui-sref="BotlleInfo({id: botlle._id})" class="borderRadius marginBottom btn btn-info pull-right">Botlle</button><br><br>
     			</div>
 			</div>
 		</div>
