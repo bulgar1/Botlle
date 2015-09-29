@@ -25,7 +25,7 @@
 					$state.go('Home')
 					vm.class = 'fadeInLeft'
 				}, 400);
-				
+
 			});
 		};
 
@@ -37,14 +37,14 @@
 		vm.getUser = function(){
 			console.log('working inside get userFunction')
 			UserFactory.getUser(vm.status.id).then(function(res){
-				vm.pinUser = res
+				vm.botlleUser = res
 				console.log('got user')
-				console.log(vm.pinUser)
+				console.log(vm.botlleUser)
 			})
 		}
 		if(vm.status.id){
 				vm.getUser();
 		}
-	
+
 	}
 })();

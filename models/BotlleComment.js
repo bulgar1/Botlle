@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 
-var PinCommentSchema = new mongoose.Schema({
+var BotlleCommentSchema = new mongoose.Schema({
   created: Date,
   body: String,
-  pin: {type: mongoose.Schema.Types.ObjectId, ref: 'Pin'},
+  botlle: {type: mongoose.Schema.Types.ObjectId, ref: 'Botlle'},
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   name: String,
   userimg: String,
   deleted: {type: Boolean, default: false}
 });
 
-mongoose.model('PinComment', PinCommentSchema);
+mongoose.model('BotlleComment', BotlleCommentSchema);

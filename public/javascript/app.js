@@ -8,16 +8,16 @@
 			url: '/',
 			contorller: 'HomeController',
 			templateUrl: 'views/home.html'
-		}).state('CreatePin', {
-			url: '/createPin',
-			controller: 'CeatePinController',
-			templateUrl: 'views/CreatePin.html',
+		}).state('CreateBotlle', {
+			url: '/createBotlle',
+			controller: 'CeateBotlleController',
+			templateUrl: 'views/CreateBotlle.html',
 			controllerAs: 'vm'
-		}).state('PinInfo', {
-			url: '/pin/:id',
-			controller: 'PinInfoController',
+		}).state('BotlleInfo', {
+			url: '/botlle/:id',
+			controller: 'BotlleInfoController',
 			controllerAs: 'vm',
-			templateUrl: 'views/PinInfo.html'
+			templateUrl: 'views/BotlleInfo.html'
 		}).state('RegisterUser', {
 			url: '/register',
 			templateUrl: 'views/Register.html'
@@ -29,11 +29,11 @@
 			templateUrl: 'views/Profile.html',
 			controller: 'NavBarController',
 			controllerAs: 'vm'
-		}).state('EditPin', {
-			url: '/pin/edit/:id',
-			controller: 'PinInfoController',
+		}).state('EditBotlle', {
+			url: '/botlle/edit/:id',
+			controller: 'BotlleInfoController',
 			controllerAs: 'vm',
-			templateUrl: '/views/EditPin.html'
+			templateUrl: '/views/EditBotlle.html'
 		})
 		$urlRouterProvider.otherwise('/');
 	}

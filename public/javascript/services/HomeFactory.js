@@ -7,7 +7,7 @@
 
 	function HomeFactory($http, $q, $rootScope) {
 		var o = {};
-		o.pin = {}
+		o.botlle = {}
 		function getAuth() {
 			var auth = {
 				headers: {
@@ -16,35 +16,35 @@
 			}
 			return auth;
 		}
-		o.CreateNewPin = function(pin){
+		o.CreateNewBotlle = function(botlle){
 			var q = $q.defer();
-			
-			pin.user = $rootScope._user.id
-			console.log(pin)
-			
+
+			botlle.user = $rootScope._user.id
+			console.log(botlle)
+
 			// pin.user = $rootScope.user.id
 			// console.log('this is user id'  + pin.user)
 			// console.log('creating new pin line 13')
-			$http.post('/pin', pin, getAuth()).success(function(res){
+			$http.post('/botlle', botlle, getAuth()).success(function(res){
 				q.resolve();
 			})
-			return q.promise; 
+			return q.promise;
 		}
-		
-		o.getPins = function(){
+
+		o.getBotlles = function(){
 			var q = $q.defer();
 			console.log('inside homefactory')
-			$http.get('/pin')
+			$http.get('/botlle')
 			.success(function(res){
 				q.resolve(res);
 			})
 			return q.promise;
 		}
-		o.getPin = function(id){
+		o.getBotlle = function(id){
 			console.log(id);
 			var q = $q.defer();
-			console.log('in side get Pin in homefactory')
-			$http.get('/pin/' +  id, getAuth()).success(function(res){
+			console.log('in side get Botlle in homefactory')
+			$http.get('/botlle/' +  id, getAuth()).success(function(res){
 				q.resolve(res);
 			})
 			return q.promise;
@@ -71,33 +71,33 @@
 				console.log('trying to make request to change comment')
 				q.resolve(res);
 			})
-			return q.promise; 
+			return q.promise;
 		}
 		o.addOne = function(id){
 			var q = $q.defer();
-			$http.post('/pin/add/' + id, null, getAuth()).success(function(res){
+			$http.post('/botlle/add/' + id, null, getAuth()).success(function(res){
 				q.resolve(res);
 			})
 			return q.promise;
 		}
 		o.subOne = function(id){
 			var q = $q.defer();
-			$http.post('/pin/sub/' + id, null, getAuth()).success(function(res){
+			$http.post('/botlle/sub/' + id, null, getAuth()).success(function(res){
 				q.resolve(res);
 			})
 			return q.promise;
 
 		}
-		o.editPin = function(id, pin){
+		o.editBotlle = function(id, botlle){
 			var q = $q.defer();
-			$http.post('/pin/' + id, pin, getAuth()).success(function(res){
+			$http.post('/botlle/' + id, botlle, getAuth()).success(function(res){
 				q.resolve();
 			})
 			return q.promise;
 		}
-		o.deletePin = function(id){
+		o.deleteBotlle = function(id){
 			var q = $q.defer();
-			$http.post('/pin/delete/' + id, null, getAuth()).success(function(res){
+			$http.post('/botlle/delete/' + id, null, getAuth()).success(function(res){
 				q.resolve();
 			})
 			 return q.promise;

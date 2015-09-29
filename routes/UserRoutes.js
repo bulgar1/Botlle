@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var passport = require('passport');
-var PinComment = mongoose.model('PinComment'); //Multiple ways of bringing authentication from different providers. such as fb, local, google, twitch
+var BotlleComment = mongoose.model('BotlleComment'); //Multiple ways of bringing authentication from different providers. such as fb, local, google, twitch
 
 
 // router.use('/', function(req, res, next){
@@ -11,7 +11,7 @@ var PinComment = mongoose.model('PinComment'); //Multiple ways of bringing authe
 // 	next();
 // })
 router.param('id', function (req, res, next, id){
-	User.findOne({_id: id}).populate('pins').exec(function (err, user_id){
+	User.findOne({_id: id}).populate('botlles').exec(function (err, user_id){
 
 		// console.log('this is the user ' + user_id._id)
 			req.fulluser = user_id
@@ -19,7 +19,7 @@ router.param('id', function (req, res, next, id){
 			req.user = user_id._id
 			console.log(req.user)
 
-			
+
 			// console.log(req.user)
 			next();
 		// })
@@ -28,8 +28,8 @@ router.param('id', function (req, res, next, id){
 // router.param('userid', function (req, res, next, id){
 // 	console.log('trying to add friend')
 // 	console.log(id);
-// 	req.userfriend = id 
-	
+// 	req.userfriend = id
+
 // 	next();
 // })
 // router.post('/add/friend/:id/:userid', function (req, res){

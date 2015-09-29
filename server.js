@@ -6,13 +6,13 @@ var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
 var passport = require('passport'); //passport below mongoose
 //models here
-require('./models/Pin');
+require('./models/Botlle');
 require('./models/User');
-require('./models/PinComment');
+require('./models/BotlleComment');
 //passport at the bottom of the models
 require('./config/passport');
 //connection
-mongoose.connect('mongodb://localhost/pin_app');
+mongoose.connect('mongodb://localhost/botlle_app');
 
 app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
@@ -33,14 +33,14 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-var pinRoutes = require('./routes/PinRoutes');
+var botlleRoutes = require('./routes/BotlleRoutes');
 var userRoutes = require('./routes/UserRoutes');
 var commentRoutes = require('./routes/CommentRoutes');
 // //on homepage load, render the index page
 app.get('/', function(req, res) {
   res.render('index');
 });
-app.use('/pin', pinRoutes);
+app.use('/botlle', botlleRoutes);
 app.use('/comments', commentRoutes);
 app.use('/users', userRoutes);
 

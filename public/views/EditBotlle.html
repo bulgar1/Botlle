@@ -1,0 +1,17 @@
+<form class="well container animated" ng-submit="vm.editBotlle(vm.botlle._id)" ng-class="vm.class">
+	<div>
+		<label>Brand</label>
+		<input class="form-control" placeholder="{{vm.botlle.title}}" ng-model="vm.newTitle">
+		<label>Image</label>
+		<input class="form-control" placeholder="{{vm.botlle.img}}" ng-model="vm.newImg"><span><img class="img-responsive" src="{{vm.botlle.img}}"></span>
+		<label>Description</label>
+		<input class="form-control" placeholder="{{vm.botlle.desc}}" ng-model="vm.newDesc">
+		<center><button type="submit" class="btn btn-primary" ng-disabled="!vm.newTitle || !vm.newImg || !vm.newDesc" ng-click="vm.class='zoomOutDown'">Submit</button>
+		<center>
+	</div>
+	</form>
+<div class="well"><center>
+	<button class="btn btn-danger" ng-click="vm.deleteBotlle(vm.borlle._id)">
+				Delete
+	</button></center>
+</div>

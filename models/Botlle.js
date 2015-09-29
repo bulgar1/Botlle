@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 
-var PinSchema = mongoose.Schema({
+var BotlleSchema = mongoose.Schema({
 	title: String,
 	created: Date,
 	img: String, //0 - 10 user rating,
 	desc: {type: String, maxlength: 50},
 	likes: {type: Number, default: 0},
-	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PinComment' }],
+	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BotlleComment' }],
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	deleted: {type: Boolean, default: true}
 	// ,
@@ -14,4 +14,4 @@ var PinSchema = mongoose.Schema({
 	// userdislikes: type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-mongoose.model('Pin', PinSchema);
+mongoose.model('Botlle', BotlleSchema);

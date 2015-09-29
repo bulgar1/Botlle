@@ -9,8 +9,8 @@ var UserSchema = new mongoose.Schema({
 	image: String,
 	passwordHash: String,
 	salt: String,
-	comments: [{type: mongoose.Schema.Types.ObjectId, ref: "PinComment"}],
-	pins: [{type: mongoose.Schema.Types.ObjectId, ref: "Pin"}],
+	comments: [{type: mongoose.Schema.Types.ObjectId, ref: "BotlleComment"}],
+	botlles: [{type: mongoose.Schema.Types.ObjectId, ref: "Botlle"}],
 	friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}]
 });
 

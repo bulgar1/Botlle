@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var Pin = mongoose.model('Pin');
+var Botlle = mongoose.model('Botlle');
 var express = require('express');
 var router = express.Router();
-var PinComment = mongoose.model('PinComment');
+var BotlleComment = mongoose.model('BotlleComment');
 var jwt = require("express-jwt");
 var User = mongoose.model('User');
 
@@ -20,25 +20,25 @@ router.use('/', function (req, res, next){
 router.param('id', function (req, res, next, id) {
 	// console.log('in params function')
 	// console.log(id);
-	Pin.findOne({_id:id}).populate([{path:'comments'}, {path: 'user'}]).exec(function (err, pin){
-		// console.log('this is the pin ' + pin)
-		req.pin = pin
+	Botlle.findOne({_id:id}).populate([{path:'comments'}, {path: 'user'}]).exec(function (err, botlle){
+		// console.log('this is the botlle ' + botlle)
+		req.botlle = botlle
 		next();
 	})
-	
+
 });
 router.post('/delete/:id', auth, function (req, res){
 	// console.log('tyring to delete pin in server')
-	Pin.update({_id: req.params.id}, {deleted: false}, function (err, response){
+	Botlle.update({_id: req.params.id}, {deleted: false}, function (err, response){
 		res.send();
 	})
-		
+
 })
 
 router.post('/:id', auth, function(req, res){
 	// console.log('inside edit pin function in server line 34')
 	// console.log(req.body)
-	Pin.update({_id: req.params.id}, req.body, function (err, response){
+	Botlle.update({_id: req.params.id}, req.body, function (err, response){
 		// console.log(response);
 		res.send();
 	})
@@ -46,15 +46,15 @@ router.post('/:id', auth, function(req, res){
 
 router.post('/add/:id', auth, function (req, res) {
   // console.log('trying to add to likes')
-  var pin_id = req.params.id
-  console.log(pin_id)
-	  Pin.findOne({_id: pin_id}, function (err, response) {
+  var botlle_id = req.params.id
+  console.log(botlle_id)
+	  Botlle.findOne({_id: botlle_id}, function (err, response) {
 	  	// console.log(response)
 	  	var updatedLikes = response.likes
 	  	// console.log(updatedLikes)
 	  	//check ----
 	  	updatedLikes = updatedLikes + 1
-	  	Pin.update({_id: response.id}, {likes: updatedLikes}, function (err, likes) {
+	  	Botlle.update({_id: response.id}, {likes: updatedLikes}, function (err, likes) {
 	  		res.send()
 	  	})
 	  })
@@ -62,14 +62,14 @@ router.post('/add/:id', auth, function (req, res) {
 
 router.post('/sub/:id', auth, function (req, res) {
   // console.log('trying to add to likes')
-  var pin_id = req.params.id
-  console.log(pin_id)
-	  Pin.findOne({_id: pin_id}, function (err, response) {
+  var botlle_id = req.params.id
+  console.log(botlle_id)
+	  Botlle.findOne({_id: botlle_id}, function (err, response) {
 	  	// console.log(response)
 	  	var updatedLikes = response.likes
 	  	// console.log(updatedLikes)
 	  	updatedLikes = updatedLikes - 1
-	  	Pin.update({_id: response.id}, {likes: updatedLikes}, function (err, likes) {
+	  	Botlle.update({_id: response.id}, {likes: updatedLikes}, function (err, likes) {
 	  		res.send()
 	  	})
 	  })
@@ -77,16 +77,16 @@ router.post('/sub/:id', auth, function (req, res) {
 
 router.post('/', function (req, res){
 	console.log(req.body)
-	var pin = new Pin(req.body)
-	pin.save(function(err, response){
+	var botlle = new Botlle(req.body)
+	botlle.save(function(err, response){
 		if(err) return res.status(500).send({err: "The server is having issues."});
-		if(!response) return res.status(400).send({err: "Could not create that pin."});
+		if(!response) return res.status(400).send({err: "Could not create that botlle."});
 		// console.log('------------------------------')
 		console.log(response.user);
-		User.update({_id: response.user}, 	{$push: 
-												
+		User.update({_id: response.user}, 	{$push:
+
 												{
-													pins: {
+													botlles: {
 														_id: response._id
 													}
 												}
@@ -102,17 +102,17 @@ router.post('/', function (req, res){
 })
 
 router.get('/', function (req, res){
-	Pin.find({})
-	.exec(function (err, pins) {
-		// console.log(pins)
-		if(err) return res.status(500).send({err: "error getting all pins"});
-		if(!pins) return res.status(500).send({err: "pins do not exist"});
-		res.send(pins);
+	Botlle.find({})
+	.exec(function (err, botlles) {
+		// console.log(botlles)
+		if(err) return res.status(500).send({err: "error getting all botlles"});
+		if(!botlles) return res.status(500).send({err: "botlles do not exist"});
+		res.send(botlles);
 	});
 })
 
 router.get('/:id', function (req, res){
-		res.send(req.pin)
+		res.send(req.botlle)
 })
 
 

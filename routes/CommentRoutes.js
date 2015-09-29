@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var PinComment = mongoose.model('PinComment');
-var Pin = mongoose.model('Pin');
+var BotlleComment = mongoose.model('BotlleComment');
+var Botlle = mongoose.model('Botlle');
 var jwt = require('express-jwt');
 var User = mongoose.model('User')
 var auth = jwt({
@@ -13,11 +13,11 @@ var auth = jwt({
 router.param('id', function(req, res, next, id){
   console.log(id)
   console.log('inside commentRoutes')
-  PinComment.findOne({_id: id}).exec(function(err, pin){
-    console.log(pin)
-      req.pin = pin
+  PinComment.findOne({_id: id}).exec(function(err, botlle){
+    console.log(botlle)
+      req.botlle = botlle
   })
-  
+
   next();
 })
 
@@ -34,7 +34,7 @@ router.post('/', auth, function(req, res) {
         temp = temp[0].name;
         tempImg = tempImg[0].image;
         // console.log('------------------ ' + temp[0].image);
-        var comment = new PinComment(req.body);
+        var comment = new BotlleComment(req.body);
           comment.created = new Date();
           comment.user = req.payload.id;
           comment.name = temp;
@@ -47,19 +47,19 @@ router.post('/', auth, function(req, res) {
           if (!result) return res.status(400).send({
             err: "Could not create comment"
           });
-            
-          Pin.update({ _id: comment.pin}, 
-            {$push: 
+
+          Botlle.update({ _id: comment.botlle},
+            {$push:
               {
                 comments: {
                   _id: result._id
                 }
               }
-            }, 
+            },
           function(err, movie) {
             if(err) return res.status(500).send({err: "there was an error"});
             if(!movie) return res.status(400).send({err: "this error should never happen"});
-            PinComment.findOne({ _id : result._id }).populate("user").exec(function(err, comment) {
+            BotlleComment.findOne({ _id : result._id }).populate("user").exec(function(err, comment) {
                 res.send(comment);
             })
           })
@@ -71,7 +71,7 @@ router.post('/:id', auth, function(req, res){
   // console.log('changing comment in server')
   var comment_id = req.params.id
   // console.log(req.body.body)
-  PinComment.update({_id: comment_id}, {body: req.body.body}, function(err, response){
+  BotlleComment.update({_id: comment_id}, {body: req.body.body}, function(err, response){
     if(err) return res.status(500).send({err: "there was an error"});
     if(!response) return res.status(400).send({err: "this error should never happen"});
     console.log(response)
@@ -84,7 +84,7 @@ router.post('/:id', auth, function(req, res){
 router.delete('/:id', auth, function(req, res){
   // console.log(req.params.id)
   var comment_id = req.params.id;
-  PinComment.findOne({_id: req.params.id}).exec(function(err, response){
+  BotlleComment.findOne({_id: req.params.id}).exec(function(err, response){
     // console.log(response)
     response.update({deleted: true}).exec(function(err, comment){
       // console.log(comment);
